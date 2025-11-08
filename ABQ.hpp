@@ -104,7 +104,6 @@ public:
         delete[] array_;
         array_ = t;
         if (curr_size_ <= capacity_/4) shrinkIfNeeded();
-        shrinkIfNeeded();
         return temp;
     }
 
