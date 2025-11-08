@@ -87,12 +87,13 @@ public:
 
     // Insertion
     void ensureCapacity(){
-        T* t = new T[capacity_ * SCALE_FACTOR];
+        size_t newCap = (capacity_ == 0) ? 1 : (capacity_ * SCALE_FACTOR);
+        T* t = new T[newCap];
         for(size_t i = 0; i < size_; i++){
             t[i] = data_[(front_+ i) % capacity_];
         }
         delete[] data_;
-        capacity_ = (capacity_ == 0) ? 1 : (capacity_ *= SCALE_FACTOR);
+        capacity_ = newCap;
         front_ = 0;
         back_ = size_;
         data_ = t;
@@ -130,13 +131,14 @@ public:
     }
 
     void shrinkIfNeeded(){
-        if (size_*4<capacity_){
-            T* t = new T[capacity_/2];
-            for(int i = 0; i < size_; i++){
+        if (capacity_ > 4 && size_*4 < capacity_){
+            size_t newCap = (capacity_ == 0) ? 1 : (capacity_ /= 2);
+            T* t = new T[newCap];
+            for(size_t i = 0; i < size_; i++){
                 t[i] = data_[(front_+ i) % capacity_];
             }
             delete[] data_;
-            capacity_ = (capacity_ == 0) ? 1 : (capacity_ /= 2);
+            capacity_ = newCap;
             front_ = 0;
             back_ = size_;
             data_ = t;

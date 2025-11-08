@@ -13,22 +13,18 @@ public:
     // Constructor
     LLQ(){}
 
-    LLQ(const LLQ<T>& other) {//LLQ obj(a)
-        LinkedList<T> newL(other.list);
-        list = newL;
-    }
+    LLQ(const LLQ<T>& other) : list(other.list){}
 
     LLQ& operator=(const LLQ<T>& other){//obg = a
+         if(this == &other) return *this;
         list = other.list;
         return *this;
     }
 
-    LLQ(LLQ<T>&& other) noexcept{
-        LinkedList<T> newL(std::move(other.list));
-        list = newL;
-    }
+    LLQ(LLQ<T>&& other) noexcept : list(std::move(other.list)){}
 
     LLQ& operator=(LLQ<T>&& other) noexcept{
+         if(this == &other) return *this;
         list = std::move(other.list);
         return *this;
     }

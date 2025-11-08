@@ -79,7 +79,7 @@ public:
     // Insertion
     void enqueue(const T& data) override{
         if(curr_size_ == capacity_){
-            capacity_ = (capacity_ == 0) ? 1 : (capacity_ << 1);
+            capacity_ = (capacity_ == 0) ? 1 : (capacity_ * scale_factor_);
             T* t = new T[capacity_];
             std::copy(array_, array_ + curr_size_, t);
             delete[] array_;
@@ -98,9 +98,9 @@ public:
         if (curr_size_ == 0) throw std::runtime_error("array is empty");
         T temp = array_[0];
         T* t = new T[capacity_];
-        std::copy(array_ + 1, array_ + curr_size_, t);
-        delete[] array_;
         curr_size_--;
+        std::copy(array_ + 1, array_ + curr_size_+1, t);
+        delete[] array_;
         array_ = t;
         return temp;
     }

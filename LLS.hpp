@@ -15,22 +15,18 @@ public:
     // Constructor
     LLS(){}
 
-    LLS(const LLS<T>& other) {//LLS obj(a)
-        LinkedList<T> newL(other.list);
-        list = newL;
-    }
+    LLS(const LLS<T>& other) : list(other.list){}
 
     LLS& operator=(const LLS<T>& other){//obg = a
+        if(this == &other) return *this;
         list = other.list;
         return *this;
     }
 
-    LLS(LLS<T>&& other) noexcept{
-        LinkedList<T> newL(std::move(other.list));
-        list = newL;
-    }
+    LLS(LLS<T>&& other) noexcept : list(std::move(other.list)){}
 
     LLS& operator=(LLS<T>&& other) noexcept{
+        if(this == &other) return *this;
         list = std::move(other.list);
         return *this;
     }
