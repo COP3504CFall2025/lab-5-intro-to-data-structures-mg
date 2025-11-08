@@ -114,6 +114,7 @@ public:
 
     // Deletion
     T popFront() override{
+        if (size_ == 0) throw std::runtime_error("array is empty");
         T t = data_[front_];
         front_ = (front_ + 1) % capacity_;
         size_--;
@@ -121,6 +122,7 @@ public:
     }
 
     T popBack() override{
+        if (size_ == 0) throw std::runtime_error("array is empty");
         back_ = (back_ - 1 + capacity_) % capacity_;
         T t = data_[back_];
         size_--;
@@ -155,8 +157,12 @@ public:
         std::cout << std::endl;
     }
     // Access
-    const T& front() const override{return data_[front_];}
-    const T& back() const override{return data_[back_-1];}
+    const T& front() const override{
+        if (size_ == 0) throw std::runtime_error("array is empty");
+        return data_[front_];}
+    const T& back() const override{
+        if (size_ == 0) throw std::runtime_error("array is empty");
+        return data_[back_-1];}
 
     // Getters
     std::size_t getSize() const noexcept override{return size_;}

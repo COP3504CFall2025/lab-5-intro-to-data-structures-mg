@@ -86,9 +86,12 @@ public:
         array_[curr_size_++] = data;
     }
 
-    T peek() const override{return array_[curr_size_-1];}
+    T peek() const override{
+        if (curr_size_ == 0) throw std::runtime_error("array is empty");
+        return array_[curr_size_-1];}
 
     T pop() override{
+        if (curr_size_ == 0) throw std::runtime_error("array is empty");
         T t = array_[--curr_size_];
         return t;
     }

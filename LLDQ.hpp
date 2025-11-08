@@ -41,29 +41,33 @@ public:
 
     // Core Insertion Operations
     void pushFront(const T& item) override{
-        list.addHead(item);
+        list.AddHead(item);
     }
     void pushBack(const T& item) override{
-        list.addTail(item);
+        list.AddTail(item);
     }
 
     // Core Removal Operations
     T popFront() override{
+        if (list.getCount()==0) throw std::runtime_error("array is empty");
         T temp = list.getData();
-        list.removeHead();
+        list.RemoveHead();
         return temp;
     }
     T popBack() override{
+        if (list.getCount()==0) throw std::runtime_error("array is empty");
         T temp = list.getDataT();
-        list.removeTail();
+        list.RemoveTail();
         return temp;
     }
 
     // Element Accessors
     const T& front() const override{
+        if (list.getCount()==0) throw std::runtime_error("array is empty");
         return list.getHead()->data;
     }
     const T& back() const override{
+        if (list.getCount()==0) throw std::runtime_error("array is empty");
         return list.getTail()->data;
     }
     void PrintForward(){list.printForward();}

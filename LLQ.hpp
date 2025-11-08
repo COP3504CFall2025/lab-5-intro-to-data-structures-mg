@@ -40,18 +40,20 @@ public:
 
     // Insertion
     void enqueue(const T& item) override{
-        list.addTail(item);
+        list.AddTail(item);
     }
 
     // Deletion
     T dequeue() override{
+        if (list.getCount()==0) throw std::runtime_error("array is empty");
         T t = peek();
-        list.removeHead();
+        list.RemoveHead();
         return t;
     }
 
     // Access
     T peek() const override{
+        if (list.getCount()==0) throw std::runtime_error("array is empty");
         return list.getData();
     }
 

@@ -89,10 +89,13 @@ public:
     }
 
     // Access
-    T peek() const override{return array_[0];}
+    T peek() const override{
+        if (curr_size_ == 0) throw std::runtime_error("array is empty");
+        return array_[0];}
 
     // Deletion
     T dequeue() override{
+        if (curr_size_ == 0) throw std::runtime_error("array is empty");
         T temp = array_[0];
         T* t = new T[capacity_];
         std::copy(array_ + 1, array_ + curr_size_, t);

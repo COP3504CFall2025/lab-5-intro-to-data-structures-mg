@@ -43,18 +43,20 @@ public:
 
     // Insertion
     void push(const T& item) override{
-        list.addHead(item);
+        list.AddHead(item);
     }
 
     // Deletion
     T pop() override{
+        if (list.getCount()==0) throw std::runtime_error("array is empty");
         T temp = list.getData();
-        list.removeHead();
+        list.RemoveHead();
         return temp;
     }
 
     // Access
     T peek() const override{
+        if (list.getCount()==0) throw std::runtime_error("array is empty");
         return list.getData();
     }
 

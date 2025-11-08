@@ -10,7 +10,7 @@ class LinkedList {
 		Node* prev = nullptr;
 		Node* next = nullptr;
 	};
-	
+
 	Node* head;
 	Node* tail;
 	unsigned int count;
@@ -44,7 +44,7 @@ public:
 	const Node* getTail() const{return tail;}
 
 	// Insertion
-	void addHead(const T& data){
+	void AddHead(const T& data){
 		Node* newNode = new Node;
 		newNode->data = data;
 		if(head != nullptr){
@@ -57,7 +57,7 @@ public:
 		count++;
 	}
 
-	void addTail(const T& data){
+	void AddTail(const T& data){
 		Node* newNode = new Node;
 		newNode->data = data;
 		if(tail != nullptr){
@@ -71,7 +71,7 @@ public:
 	}
 
 	// Removal
-	bool removeHead(){
+	bool RemoveHead(){
 		if(count == 0) return false;
 		if(count == 1){
 			delete head;
@@ -88,7 +88,7 @@ public:
 		}
 	}
 
-	bool removeTail(){
+	bool RemoveTail(){
 		if(count == 0) return false;
 		if (count == 1){
 			delete tail;
@@ -104,7 +104,7 @@ public:
 			return true;
 		}
 	}
-	void Clear(){while(removeTail()){}}
+	void Clear(){while(RemoveTail()){}}
 
 	// Operators
 	LinkedList<T>& operator=(LinkedList<T>&& other) noexcept{
