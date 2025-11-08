@@ -17,7 +17,7 @@ class LinkedList {
 
 public:
 	// Behaviors
-	void printForward() const{
+	void PrintForward() const{
 		Node* cur = head;
 		while(cur != nullptr){
 			std::cout << cur->data << " ";
@@ -25,7 +25,7 @@ public:
 		}
 		std::cout << std::endl;
 	}
-	void printReverse() const{
+	void PrintReverse() const{
 		Node* cur = tail;
 		while(cur != nullptr){
 			std::cout << cur->data << " ";
@@ -124,7 +124,7 @@ public:
 		Node* current = rhs.head;
 		Clear();
 		while(current != nullptr) {
-			addTail(current->data);
+			AddTail(current->data);
 			current = current->next;
 		}
 		return *this;
@@ -136,7 +136,7 @@ public:
 	LinkedList(const LinkedList<T>& list) : head(nullptr), tail(nullptr), count(0){
 		Node* current = list.head;
 		while(current != nullptr) {
-			addTail(current->data);
+			AddTail(current->data);
 			current = current->next;
 		}
 	}
