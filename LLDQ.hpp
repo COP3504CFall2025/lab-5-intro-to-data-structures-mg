@@ -70,8 +70,8 @@ public:
         if (list.getCount()==0) throw std::runtime_error("array is empty");
         return list.getTail()->data;
     }
-    void PrintForward(){list.printForward();}
-    void PrintReverse(){list.printReverse();}
+    void PrintForward(){list.PrintForward();}
+    void PrintReverse(){list.PrintReverse();}
     
     // Getter
     std::size_t getSize() const noexcept override{
