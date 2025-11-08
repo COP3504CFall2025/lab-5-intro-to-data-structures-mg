@@ -1,15 +1,15 @@
 
 
-// #include "ABDQ.hpp"
-// #include "ABQ.hpp"
-// #include "ABS.hpp"
-// #include "Interfaces.hpp"
-// #include "LinkedList.hpp"
-// #include "LLDQ.hpp"
-// #include "LLQ.hpp"
-// #include "LLS.hpp"
-// #include <iostream>
-// #include <utility>
+#include "ABDQ.hpp"
+#include "ABQ.hpp"
+#include "ABS.hpp"
+#include "Interfaces.hpp"
+#include "LinkedList.hpp"
+#include "LLDQ.hpp"
+#include "LLQ.hpp"
+#include "LLS.hpp"
+#include <iostream>
+#include <utility>
 // /*
 //     - LEAVE THE IFDEF GUARDS TO KEEP YOUR MAIN WITHOUT CONFLICTING WITH GRADESCOPE!
 //     - Test your code in this main and run locally with the RunMain configuration in CLion, or
@@ -18,14 +18,14 @@
 
 // */
 
-// int main() {
-//     LLS<int> a;
-//     LLQ<int> b;
-//     LLDQ<int> c;
-//     ABS<int> d;
-//     ABQ<int> e;
-//     ABDQ<int> f;
-//     return 0;
-// }
+int main() {
+    LLS<int> a;
+    LLQ<int> b;
+    LLDQ<int> c;
+    ABS<int> d;
+    ABQ<int> e;
+    ABDQ<int> f;
+    return 0;
+}
 
 

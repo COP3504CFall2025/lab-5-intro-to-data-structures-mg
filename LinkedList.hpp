@@ -33,6 +33,23 @@ public:
 		}
 		std::cout << std::endl;
 	}
+	void PrintForward() const{
+		Node* cur = head;
+		while(cur != nullptr){
+			std::cout << cur->data << " ";
+			cur = cur->next;
+		}
+		std::cout << std::endl;
+	}
+	void PrintReverse() const{
+		Node* cur = tail;
+		while(cur != nullptr){
+			std::cout << cur->data << " ";
+			cur = cur->prev;
+		}
+		std::cout << std::endl;
+	}
+
 
 	// Accessors
 	[[nodiscard]] unsigned int getCount() const{return count;}
