@@ -10,3 +10,9 @@ run:
 clean:
 	rm ./run.out
 
+
+Git:
+	git add .
+	git commit -m "fix"
+	git push origin main
+
