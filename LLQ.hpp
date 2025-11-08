@@ -35,8 +35,8 @@ public:
 
     ~LLQ(){}
 
-    void PrintForward(){list.PrintForward();}
-    void PrintReverse(){list.PrintReverse();}
+    void PrintForward(){list.printForward();}
+    void PrintReverse(){list.printReverse();}
 
     // Insertion
     void enqueue(const T& item) override{

@@ -38,8 +38,8 @@ public:
     ~LLS(){}
 
     //print
-    void PrintForward(){list.PrintForward();}
-    void PrintReverse(){list.PrintReverse();}
+    void PrintForward(){list.printForward();}
+    void PrintReverse(){list.printReverse();}
 
     // Insertion
     void push(const T& item) override{

@@ -17,7 +17,7 @@ class LinkedList {
 
 public:
 	// Behaviors
-	void PrintForward() const{
+	void printForward() const{
 		Node* cur = head;
 		while(cur != nullptr){
 			std::cout << cur->data << " ";
@@ -25,7 +25,7 @@ public:
 		}
 		std::cout << std::endl;
 	}
-	void PrintReverse() const{
+	void printReverse() const{
 		Node* cur = tail;
 		while(cur != nullptr){
 			std::cout << cur->data << " ";
