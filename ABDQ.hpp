@@ -131,7 +131,7 @@ public:
     }
 
     void shrinkIfNeeded(){
-        if (capacity_ > 4 && size_*4 < capacity_){
+        if (capacity_ > 4 && size_*4 <= capacity_){
             size_t newCap = (capacity_ == 0) ? 1 : (capacity_ /= 2);
             T* t = new T[newCap];
             for(size_t i = 0; i < size_; i++){

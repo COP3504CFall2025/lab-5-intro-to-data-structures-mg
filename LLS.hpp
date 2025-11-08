@@ -44,9 +44,8 @@ public:
 
     // Deletion
     T pop() override{
-        if (list.getCount() == 0) throw std::runtime_error("array is empty");
+        if (!(list.RemoveHead())) throw std::runtime_error("array is empty");
         T temp = list.getData();
-        list.RemoveHead();
         return temp;
     }
 

@@ -77,7 +77,7 @@ public:
     // Push item onto the stack
     void push(const T& data) override{
         if(curr_size_ == capacity_){
-            capacity_ = (capacity_ == 0) ? 1 : (capacity_ << 1);
+            capacity_ = (capacity_ == 0) ? 1 : (capacity_ * scale_factor_);
             T* t = new T[capacity_];
             std::copy(array_, array_ + curr_size_, t);
             delete[] array_;
@@ -92,7 +92,8 @@ public:
 
     T pop() override{
         if (curr_size_ == 0) throw std::runtime_error("array is empty");
-        T t = array_[--curr_size_];
+        curr_size_--;
+        T t = array_[curr_size_];
         return t;
     }
 
