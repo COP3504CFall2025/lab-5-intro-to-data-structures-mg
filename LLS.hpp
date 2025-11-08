@@ -38,8 +38,8 @@ public:
     ~LLS(){}
 
     //print
-    void PrintForward(){list.printForward();}
-    void PrintReverse(){list.printReverse();}
+    void PrintForward(){list.PrintForward();}
+    void PrintReverse(){list.PrintReverse();}
 
     // Insertion
     void push(const T& item) override{
@@ -48,7 +48,7 @@ public:
 
     // Deletion
     T pop() override{
-        if (list.getCount()==0) throw std::runtime_error("array is empty");
+        if (list.getCount() == 0) throw std::runtime_error("array is empty");
         T temp = list.getData();
         list.RemoveHead();
         return temp;
@@ -56,7 +56,7 @@ public:
 
     // Access
     T peek() const override{
-        if (list.getCount()==0) throw std::runtime_error("array is empty");
+        if (list.getCount() == 0) throw std::runtime_error("array is empty");
         return list.getData();
     }
 
