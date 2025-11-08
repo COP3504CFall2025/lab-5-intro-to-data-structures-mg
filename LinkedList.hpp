@@ -86,7 +86,7 @@ public:
 		tail = newNode;
 		count++;
 	}
-	
+
 	void addHead(const T& data){
 		Node* newNode = new Node;
 		newNode->data = data;
@@ -148,6 +148,41 @@ public:
 		}
 	}
 	void Clear(){while(RemoveTail()){}}
+
+	bool removeHead(){
+		if(count == 0) return false;
+		if(count == 1){
+			delete head;
+			head = nullptr;
+			tail = nullptr;
+			count--;
+			return true;
+		} else{
+			head = head->next;
+			delete head->prev;
+			head->prev = nullptr;
+			count--;
+			return true;
+		}
+	}
+
+	bool removeTail(){
+		if(count == 0) return false;
+		if (count == 1){
+			delete tail;
+			head = nullptr;
+			tail = nullptr;
+			count--;
+			return true;
+		} else {
+			tail = tail->prev;
+			delete tail->next;
+			tail->next = nullptr;
+			count--;
+			return true;
+		}
+	}
+	void clear(){while(RemoveTail()){}}
 
 	// Operators
 	LinkedList<T>& operator=(LinkedList<T>&& other) noexcept{
