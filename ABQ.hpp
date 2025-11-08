@@ -93,6 +93,7 @@ public:
         if (curr_size_ == 0) throw std::runtime_error("array is empty");
         return array_[0];}
 
+
     // Deletion
     T dequeue() override{
         if (curr_size_ == 0) throw std::runtime_error("array is empty");
@@ -102,22 +103,23 @@ public:
         std::copy(array_ + 1, array_ + curr_size_+1, t);
         delete[] array_;
         array_ = t;
-        // shrinkIfNeeded();
+        if (curr_size_ <= capacity_/4) shrinkIfNeeded();
+        shrinkIfNeeded();
         return temp;
     }
 
-    // void shrinkIfNeeded(){
-    //     if (curr_size_ <= capacity_/4){
-    //         size_t newCap = (capacity_ == 2) ? 1 : (capacity_ /= 2);
-    //         T* t = new T[newCap];
-    //         for(size_t i = 0; i < curr_size_; i++){
-    //             t[i] = data_[i];
-    //         }
-    //         delete[] array_;
-    //         capacity_ = newCap;
-    //         array_ = t;
-    //     }
-    // }
+    void shrinkIfNeeded(){
+        size_t newCap;
+        if (capacity_ == 2) {newCap = 1;}
+        else {newCap = capacity_ / 2;}
+        T* t = new T[newCap];
+        for(size_t i = 0; i < curr_size_; i++){
+            t[i] = array_[i];
+        }
+        delete[] array_;
+        capacity_ = newCap;
+        array_ = t;
+    }
 
     void PrintForward(){
         for(size_t i = 0; i < curr_size_; i++){
