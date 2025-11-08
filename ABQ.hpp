@@ -102,7 +102,21 @@ public:
         std::copy(array_ + 1, array_ + curr_size_+1, t);
         delete[] array_;
         array_ = t;
+        shrinkIfNeeded();
         return temp;
+    }
+
+    void shrinkIfNeeded(){
+        if (curr_size_ <= capacity_/4){
+            size_t newCap = (capacity_ == 2) ? 1 : (capacity_ /= 2);
+            T* t = new T[newCap];
+            for(size_t i = 0; i < curr_size_; i++){
+                t[i] = data_[i];
+            }
+            delete[] array_;
+            capacity_ = newCap;
+            array_ = t;
+        }
     }
 
     void PrintForward(){

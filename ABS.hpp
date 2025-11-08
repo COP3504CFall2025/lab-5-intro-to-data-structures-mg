@@ -86,14 +86,28 @@ public:
         array_[curr_size_++] = data;
     }
 
+    void shrinkIfNeeded(){
+        if (curr_size_ <= capacity_/4){
+            size_t newCap = (capacity_ == 2) ? 1 : (capacity_ /= 2);
+            T* t = new T[newCap];
+            for(size_t i = 0; i < curr_size_; i++){
+                t[i] = data_[i];
+            }
+            delete[] array_;
+            capacity_ = newCap;
+            array_ = t;
+        }
+    }
+
     T peek() const override{
         if (curr_size_ == 0) throw std::runtime_error("array is empty");
         return array_[curr_size_-1];}
 
     T pop() override{
         if (curr_size_ == 0) throw std::runtime_error("array is empty");
-        curr_size_--;
+        curr_size_--; 
         T t = array_[curr_size_];
+        shrinkIfNeeded();
         return t;
     }
 

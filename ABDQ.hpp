@@ -119,6 +119,7 @@ public:
         T t = data_[front_];
         front_ = (front_ + 1) % capacity_;
         size_--;
+        shrinkIfNeeded();
         return t;
     }
 
@@ -127,12 +128,13 @@ public:
         back_ = (back_ - 1 + capacity_) % capacity_;
         T t = data_[back_];
         size_--;
+        shrinkIfNeeded();
         return t;
     }
 
     void shrinkIfNeeded(){
-        if (capacity_ > 4 && size_*4 <= capacity_){
-            size_t newCap = (capacity_ == 0) ? 1 : (capacity_ /= 2);
+        if (size_ <= capacity_/4){
+            size_t newCap = (capacity_ == 2) ? 1 : (capacity_ /= 2);
             T* t = new T[newCap];
             for(size_t i = 0; i < size_; i++){
                 t[i] = data_[(front_+ i) % capacity_];
