@@ -92,7 +92,7 @@ public:
         else {newCap = capacity_ / 2;}
         T* t = new T[newCap];
         for(size_t i = 0; i < curr_size_; i++){
-            t[i] = data_[i];
+            t[i] = array_[i];
         }
         delete[] array_;
         capacity_ = newCap;
