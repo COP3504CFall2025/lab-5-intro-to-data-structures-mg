@@ -4,6 +4,7 @@
 #include <stdexcept>
 #include "Interfaces.hpp"
 #include <utility>
+#include <iostream>
 
 template <typename T>
 class ABDQ : public DequeInterface<T> {
@@ -18,27 +19,146 @@ private:
 
 public:
     // Big 5
-    ABDQ();
-    explicit ABDQ(std::size_t capacity);
-    ABDQ(const ABDQ& other);
-    ABDQ(ABDQ&& other) noexcept;
-    ABDQ& operator=(const ABDQ& other);
-    ABDQ& operator=(ABDQ&& other) noexcept;
-    ~ABDQ() override;
+    ABDQ() : capacity_(4), size_(0), front_(0), back_(0){
+        data_ = new T[capacity_];
+    }
+
+    explicit ABDQ(std::size_t capacity) : capacity_(capacity), size_(0), front_(0), back_(0) {
+        data_ = new T[capacity];
+    }
+
+    ABDQ(const ABDQ& other) : 
+    data_(new T[other.capacity_]), capacity_(other.capacity_),
+    size_(other.size_), front_(other.front_), back_(other.back_){
+        for(size_t i = 0; i < size_; i++)
+            data_[i] = other.data_[i];
+    }
+
+    ABDQ(ABDQ&& other) noexcept : 
+    data_(other.data_), capacity_(other.capacity_), 
+    size_(other.size_), front_(other.front_), back_(other.back_){
+        other.data_ = nullptr;
+        other.capacity_ = 0;
+        other.size_ = 0;
+        other.front_ = 0;
+        other.back_ = 0;
+    }
+
+    ABDQ& operator=(const ABDQ& other){
+        if(this == &other) return *this;
+        T* temp = new T[other.capacity_];
+        delete[] data_;
+        data_ = temp;
+        capacity_ = other.capacity_;
+        size_ = other.size_;
+        front_ = other.front_;
+        back_ = other.back_;
+        for(size_t i = 0; i < size_; i++){
+            data_[i] = other.data_[i];
+        }
+        return *this;
+    }
+
+    ABDQ& operator=(ABDQ&& other) noexcept{
+        if (this == &other) return *this;
+        delete[] data_;
+        data_ = other.data_;
+        capacity_ = other.capacity_;
+        size_ = other.size_;
+        front_ = other.front_;
+        back_ = other.back_;
+
+        other.data_ = nullptr;
+        other.size_ = 0;
+        other.capacity_ = 0;
+        other.front_ = 0;
+        other.back_ = 0;
+        return *this;
+    }
+
+    ~ABDQ() override{
+        delete[] data_;
+        data_ = nullptr;
+        capacity_ = 0;
+        size_ = 0;
+        front_ = 0;
+        back_ = 0;
+    }
 
     // Insertion
-    void pushFront(const T& item) override;
-    void pushBack(const T& item) override;
+    void ensureCapacity(){
+        T* t = new T[capacity_ * SCALE_FACTOR];
+        for(size_t i = 0; i < size_; i++){
+            t[i] = data_[(front_+ i) % capacity_];
+        }
+        delete[] data_;
+        capacity_ = (capacity_ == 0) ? 1 : (capacity_ *= SCALE_FACTOR);
+        front_ = 0;
+        back_ = size_;
+        data_ = t;
+    }
+
+    void pushFront(const T& item) override{
+        if(size_ == capacity_) ensureCapacity();
+        front_ = (front_ - 1 + capacity_) % capacity_;
+        data_[front_] = item;
+        size_++;    
+    }
+
+    void pushBack(const T& item) override{
+        if(size_ == capacity_) ensureCapacity();
+        data_[back_] = item;
+        back_ = (back_+1) % capacity_;
+        size_++;
+    }
 
     // Deletion
-    T popFront() override;
-    T popBack() override;
+    T popFront() override{
+        T t = data_[front_];
+        front_ = (front_ + 1) % capacity_;
+        size_--;
+        return t;
+    }
 
+    T popBack() override{
+        back_ = (back_ - 1 + capacity_) % capacity_;
+        T t = data_[back_];
+        size_--;
+        return t;
+    }
+
+    void shrinkIfNeeded(){
+        if (size_*4<capacity_){
+            T* t = new T[capacity_/2];
+            for(int i = 0; i < size_; i++){
+                t[i] = data_[(front_+ i) % capacity_];
+            }
+            delete[] data_;
+            capacity_ = (capacity_ == 0) ? 1 : (capacity_ /= 2);
+            front_ = 0;
+            back_ = size_;
+            data_ = t;
+        }
+    }
+    
+    void PrintForward(){
+        for(size_t i = 0; i < size_; i++){
+            std::cout << data_[(front_+ i) % capacity_] << " ";
+        }
+        std::cout << std::endl;
+    }
+
+    void PrintReverse(){
+        for(size_t i = 0; i < size_; i++){
+            std::cout << data_[(back_ - 1 - i + capacity_) % capacity_] << " ";
+        }
+        std::cout << std::endl;
+    }
     // Access
-    const T& front() const override;
-    const T& back() const override;
+    const T& front() const override{return data_[front_];}
+    const T& back() const override{return data_[back_-1];}
 
     // Getters
-    std::size_t getSize() const noexcept override;
+    std::size_t getSize() const noexcept override{return size_;}
 
 };

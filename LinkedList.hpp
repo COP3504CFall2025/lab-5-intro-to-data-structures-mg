@@ -10,6 +10,7 @@ class LinkedList {
 		Node* prev = nullptr;
 		Node* next = nullptr;
 	};
+	
 	Node* head;
 	Node* tail;
 	unsigned int count;
@@ -36,8 +37,10 @@ public:
 	// Accessors
 	[[nodiscard]] unsigned int getCount() const{return count;}
 	Node* getHead(){return head;}
+	T getData()const {return head->data;}
 	const Node* getHead() const{return head;}
 	Node* getTail(){return tail;}
+	T getDataT()const {return tail->data;}
 	const Node* getTail() const{return tail;}
 
 	// Insertion
@@ -107,12 +110,12 @@ public:
 	LinkedList<T>& operator=(LinkedList<T>&& other) noexcept{
 		if(this == &other) return *this;
 		Clear();
+		count = other.count;
 		head = other.head;
 		tail = other.tail;
-		count = other.count;
+		other.count = 0;
 		other.head = nullptr;
 		other.tail = nullptr;
-		other.count = 0;
 		return *this;
 	}
 

@@ -4,13 +4,12 @@
 // #include "ABQ.hpp"
 // #include "ABS.hpp"
 // #include "Interfaces.hpp"
-#include "LinkedList.hpp"
+// #include "LinkedList.hpp"
 // #include "LLDQ.hpp"
 // #include "LLQ.hpp"
 // #include "LLS.hpp"
-#include <iostream>
-#include <utility>
-
+// #include <iostream>
+// #include <utility>
 /*
     - LEAVE THE IFDEF GUARDS TO KEEP YOUR MAIN WITHOUT CONFLICTING WITH GRADESCOPE!
     - Test your code in this main and run locally with the RunMain configuration in CLion, or
@@ -19,39 +18,39 @@
 
 */
 
-int main() {
-    LinkedList<int> l;
-    l.addHead(5);
-    l.addHead(10);
-    l.addHead(15);
-    l.addTail(1);
-    l.printForward();
+// int main() {
+//     ABDQ<int> hello;
+//     hello.pushFront(1);
+//     hello.pushFront(2);
+//     hello.pushBack(3);
+//     hello.pushBack(4);
+//     hello.PrintForward();
+//     hello.PrintReverse();
+//     std::cout << hello.getSize() << std::endl;
+//     std::cout << hello.front() << std::endl;
+//     std::cout << hello.back() << std::endl;
 
-    //Copy constructor
-    LinkedList<int> b(l);
-    b.addTail(0);
-    b.printForward();
+//     ABDQ<int> h(hello);
+//     h.PrintForward();
+//     h.PrintReverse();
+//     std::cout << std::endl;
 
-    //Copy assignment
-    LinkedList<int> c = b;
-    c.printForward();
-    c.addHead(20);
-    c.printForward();
-    std::cout << std::endl;
+//     ABDQ<int> he;
+//     he = hello;
+//     he.PrintForward();
+//     he.PrintReverse();
+//     std::cout << std::endl; 
 
-    l.printForward();
-    b.printForward();
-    c.printForward();
+//     ABDQ<int> hel(std::move(hello));
+//     hel.PrintForward();
+//     hel.PrintReverse();
+//     std::cout << std::endl;
 
-    //Move constructor
-    LinkedList<int> d(std::move(c));
-    d.addTail(-5);
-    d.printForward();
-
-    //Move assignment
-    LinkedList<int> f = std::move(d);
-    d.printForward();
-    return 0;
-}
+//     ABDQ<int> hell;
+//     hell = std::move(he);
+//     hell.PrintForward();
+//     hell.PrintReverse();
+//     return 0;
+// }
 
 

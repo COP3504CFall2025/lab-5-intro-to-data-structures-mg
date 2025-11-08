@@ -3,6 +3,7 @@
 #include <cstddef>
 #include <stdexcept>
 #include "Interfaces.hpp"
+#include <iostream>
 
 // Technically bad, but size_t isn't likely to conflict with any client code.
 using std::size_t;
@@ -20,7 +21,7 @@ public:
     capacity_(capacity), curr_size_(0), array_(new T[capacity]){}
 
     ABS(const ABS& other) :
-    array_(new T[other.capacity_]), capacity_(other.capacity_), curr_size_(other.curr_size_){
+    capacity_(other.capacity_), curr_size_(other.curr_size_), array_(new T[other.capacity_]){
         for(size_t i = 0; i < curr_size_; i++)
             array_[i] = other.array_[i];
     }
@@ -39,7 +40,7 @@ public:
 
     }
     ABS(ABS&& other) noexcept : 
-    array_(other.array_), capacity_(other.capacity_), curr_size_(other.curr_size_){
+    capacity_(other.capacity_), curr_size_(other.curr_size_), array_(other.array_) {
         other.array_ = nullptr;
         other.capacity_ = 0;
         other.curr_size_ = 0;
@@ -88,11 +89,22 @@ public:
     T peek() const override{return array_[curr_size_-1];}
 
     T pop() override{
-        curr_size_--;
-        T* t = new T[capacity_];
-        std::copy(array_, array_ + curr_size_, t);
-        delete[] array_;
-        array_ = t;
+        T t = array_[--curr_size_];
+        return t;
+    }
+
+    void PrintForward(){
+        for(size_t i = 0; i < curr_size_; i++){
+            std::cout << array_[i] << " ";
+        }
+        std::cout << std::endl;
+    }
+
+    void PrintReverse(){
+        for(size_t i = curr_size_; i > 0; i--){
+            std::cout << array_[i-1] << " ";
+        }
+        std::cout << std::endl;
     }
 
 private:
